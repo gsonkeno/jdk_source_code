@@ -869,6 +869,7 @@ public class HashMap<K,V>
      */
     void createEntry(int hash, K key, V value, int bucketIndex) {
         Entry<K,V> e = table[bucketIndex];
+        // 多个线程同时停在这里时，会发生数据覆盖丢数据情况
         table[bucketIndex] = new Entry<>(hash, key, value, e);
         size++;
     }
